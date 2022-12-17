@@ -1,0 +1,50 @@
+<dotnetnuke version="5.0" type="Package" xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <packages>
+    <package name="avt.SearchBoost.LiveTabsIntegration" type="Module" version="05.20.01">
+      <friendlyName>avt.SearchBoost.LiveTabsIntegration</friendlyName>
+      <description>This is an extension for Search Boost that enables indexing of LiveTabs module.</description>
+      <iconFile>images/icon_dashboard.png</iconFile>
+      <owner>
+        <name>DNN Sharp</name>
+        <organization>DNN Sharp</organization>
+        <url>http://www.dnnsharp.com/dnn/integrations/live-tabs</url>
+        <email>support@dnnsharp.com</email>
+      </owner>
+      <license src="license.txt" />
+      <releaseNotes src="release-notes.html" />
+      <azureCompatible>true</azureCompatible>
+      <dependencies>
+        <dependency type="CoreVersion">09.09.00</dependency>
+        <dependency type="package">avt.SearchBoost.Input</dependency>
+      </dependencies>
+      <components>
+        <component type="Assembly">
+          <assemblies>
+            <assembly>
+              <name>DnnSharp.SearchBoost.LiveTabsIntegration.dll</name>
+              <sourceFileName>DnnSharp.SearchBoost.LiveTabsIntegration.dll</sourceFileName>
+              <version>05.20.01</version>
+            </assembly>
+          </assemblies>
+        </component>
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>/</basePath>
+            <resourceFile>
+              <name>Resources.SearchBoost.LiveTabsIntegration.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+        <component type="Cleanup" version="05.20.01">
+          <files>
+            <basePath>/</basePath>
+            <file>
+              <path>bin</path>
+              <name>avt.SearchBoost.LiveTabsIntegration.dll</name>
+            </file>
+          </files>
+        </component>
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>

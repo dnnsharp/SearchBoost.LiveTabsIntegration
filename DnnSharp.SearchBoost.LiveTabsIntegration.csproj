@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <OutputType>Library</OutputType>
+    <Configurations>Develop;Release;ReleaseAutoBuild</Configurations>
+    <RootNamespace>DnnSharp.SearchBoost.LiveTabsIntegration</RootNamespace>
+    <AssemblyName>DnnSharp.SearchBoost.LiveTabsIntegration</AssemblyName>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Develop|AnyCPU'">
+    <OutputPath>bin\Develop\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DEVELOP</DefineConstants>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseAutoBuild|AnyCPU'">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common2\DnnSharp.Common2\DnnSharp.Common2.csproj" />
+    <ProjectReference Include="..\..\Common\DnnSharp.Common\DnnSharp.Common.csproj" />
+    <ProjectReference Include="..\DnnSharp.SearchBoost.Core\DnnSharp.SearchBoost.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DotNetNuke.Core" Version="9.9.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web" />
+  </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="if $(ConfigurationName) == Debug goto copyfiles&#xD;&#xA;if $(ConfigurationName) == Develop goto copyfiles&#xD;&#xA;if $(ConfigurationName) == Release goto copyfiles&#xD;&#xA;goto end&#xD;&#xA;&#xD;&#xA;:copyfiles&#xD;&#xA;xcopy &quot;$(ProjectDir)Config\*.*&quot; &quot;$(ProjectDir)..\Config\*.*&quot; /e /s /y /q&#xD;&#xA;copy &quot;$(TargetDir)$(TargetName).dll&quot; &quot;$(ProjectDir)../../../../bin/$(TargetName).dll&quot;&#xD;&#xA;copy &quot;$(TargetDir)$(TargetName).pdb&quot; &quot;$(ProjectDir)../../../../bin/$(TargetName).pdb&quot;&#xD;&#xA;:end" />
+  </Target>
+</Project>
